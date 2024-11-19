@@ -1,0 +1,64 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+
+<section class="content" style="flex-direction: column;">
+    <h1>Информация о курсе</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row mb-3">
+            <label for="Name" class="col-sm-2 col-form-label">Название:</label>
+            {{ form.name }}
+        </div>
+        <div class="row mb-3">
+            <label for="Description" class="col-sm-2 col-form-label">Описание:</label>
+            {{ form.description }}
+        </div>
+        <div class="mb-3">
+            <label for="Teacher" class="col-sm-2 col-form-label">Преподаватель:</label>
+            <div class="form-control" style="background-color: #e9ecef;">
+                {% if course.teacher %}
+                    <a href="{% url 'teacher_detail' course.teacher.id %}">
+                        {{ course.teacher.first_name }} {{ course.teacher.last_name }}
+                    </a>
+                {% else %}
+                    Не выбран
+                {% endif %}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="Students" class="col-sm-2 col-form-label">Студенты:</label>
+            <div class="scroll-container border rounded p-2" style="background-color: #e9ecef;">
+                {% if students %}
+                    {% for student in students %}
+                        <div class="form-check d-flex justify-content-between align-items-center">
+                            <label class="form-check-label" for="student_{{ student.id }}">
+                                <a href="{% url 'student_detail' student.id %}">{{ student.first_name }} {{ student.last_name }}</a>
+                            </label>
+                            <input class="form-check-input" type="checkbox" id="student_{{ student.id }}" name="students" value="{{ student.id }}"
+                            {% if student in course.students.all %} checked disabled {% endif %}>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <span>Студенты не добавлены в курс</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="StartDate" class="col-sm-2 col-form-label">Начало:</label>
+            {{ form.start_date }}
+        </div>
+        <div class="mb-3">
+            <label for="EndDate" class="col-sm-2 col-form-label">Конец:</label>
+            {{ form.end_date }}
+        </div>
+        <span>{{ error }}</span>
+        <div class="row g-2">
+            <a href="{% url 'course_delete' course.id %}" class="btn btn-outline-danger btn-lg">Удалить</a>
+            <a href="{% url 'course_update' course.id %}" class="btn btn-outline-warning btn-lg">Изменить</a>
+            <a href="{% url 'all_courses' %}" class="btn btn-outline-info btn-lg">Назад</a>
+        </div>
+    </form>
+</section>
+
+{% endblock %}

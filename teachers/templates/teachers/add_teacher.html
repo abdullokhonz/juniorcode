@@ -1,0 +1,33 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+
+<section class="content" style="flex-direction: column;">
+    <h1>Форма по добавлению преподавателя</h1>
+    <form method="post" class="col m-1">
+        {% csrf_token %}
+        <div class="row mb-3">
+            <label for="FirstName" class="col-sm-2 col-form-label">Имя:</label>
+            {{ form.first_name }}
+        </div>
+        <div class="row mb-3">
+            <label for="LastName" class="col-sm-2 col-form-label">Фамилия:</label>
+            {{ form.last_name }}
+        </div>
+        <div class="row mb-3">
+            <label for="BirthDate" class="col-sm-2 col-form-label">Дата&nbsp;рождения:</label>
+            {{ form.birth_date }}
+        </div>
+        <div class="row mb-3">
+            <label for="Bio" class="col-sm-2 col-form-label">Биография:</label>
+            {{ form.bio }}
+        </div>
+        <span>{{ error }}</span>
+        <div class="row g-2">
+            <button class="btn btn-outline-success btn-lg" type="submit">Сохранить</button>
+            <button onclick="window.history.back();" class="btn btn-outline-danger btn-lg">Отменить</button>
+        </div>
+    </form>
+</section>
+
+{% endblock %}
