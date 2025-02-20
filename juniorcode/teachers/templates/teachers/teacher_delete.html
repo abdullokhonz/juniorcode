@@ -1,0 +1,15 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+
+<section class="content" style="flex-direction: column;">
+    <h1>Удаление преподавателя</h1>
+    <p>{{ teacher.first_name }} {{ teacher.last_name }}</p>
+    <form method="post" class="row g-2">
+        {% csrf_token %}
+        <button class="btn btn-outline-danger btn-lg" type="submit">Удалить преподавателя</button>
+        <a href="{% url 'teacher_detail' teacher.id %}" class="btn btn-outline-success btn-lg">Отменить</a>
+    </form>
+</section>
+
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+
+<section class="content" style="flex-direction: column;">
+    <div class="container-fluid">
+        <caption>Поиск преподавателей</caption>
+        <form class="d-flex" role="search" method="get" action="{% url 'all_teachers' %}">
+            <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск" name="q" value="{{ query }}">
+            <div class="col-md-3 ms-2">
+                <select name="search_field" class="form-select">
+                    <option value="all" {% if search_field == 'all' %}selected{% endif %}>Все поля</option>
+                    <option value="id" {% if search_field == 'id' %}selected{% endif %}>ID</option>
+                    <option value="first_name" {% if search_field == 'first_name' %}selected{% endif %}>Имя</option>
+                    <option value="last_name" {% if search_field == 'last_name' %}selected{% endif %}>Фамилия</option>
+                    <option value="birth_date" {% if search_field == 'birth_date' %}selected{% endif %}>Дата рождения</option>
+                </select>
+            </div>
+            <button class="btn btn-outline-success ms-2" type="submit">Поиск</button>
+            <button class="btn btn-outline-danger ms-2" type="reset" onclick="window.location.href='{% url 'all_teachers' %}'">Сброс</button>
+        </form>
+        <button class="btn btn-info mt-2 float-end" onclick="window.location.href='{% url 'add_teacher' %}'">
+            <i class="fa-solid fa-plus-circle"></i> Добавить преподавателя
+        </button>
+    </div>
+
+    <table class="table table-bordered table-striped table-hover caption-top ">
+        <caption>Список преподавателей</caption>
+        {% if teachers.count == 0 %}
+            <p>Преподаватели не найдены!</p>
+        {% endif %}
+        <thead>
+            <tr>
+                <th scope="col" class="id-col">
+                    <a href="?sort_field=id&sort_order={% if sort_field == 'id' and sort_order == 'asc' %}desc{% else %}asc{% endif %}">
+                        ID
+                        {% if sort_field == 'id' %}
+                            {% if sort_order == 'asc' %}
+                                <i class="fa-solid fa-arrow-up" style="font-size: 14px;"></i>
+                            {% else %}
+                                <i class="fa-solid fa-arrow-down" style="font-size: 14px;"></i>
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                </th>
+                <th scope="col">
+                    <a href="?sort_field=first_name&sort_order={% if sort_field == 'first_name' and sort_order == 'asc' %}desc{% else %}asc{% endif %}">
+                        Имя
+                        {% if sort_field == 'first_name' %}
+                            {% if sort_order == 'asc' %}
+                                <i class="fa-solid fa-arrow-up" style="font-size: 14px;"></i>
+                            {% else %}
+                                <i class="fa-solid fa-arrow-down" style="font-size: 14px;"></i>
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                </th>
+                <th scope="col">
+                    <a href="?sort_field=last_name&sort_order={% if sort_field == 'last_name' and sort_order == 'asc' %}desc{% else %}asc{% endif %}">
+                        Фамилия
+                        {% if sort_field == 'last_name' %}
+                            {% if sort_order == 'asc' %}
+                                <i class="fa-solid fa-arrow-up" style="font-size: 14px;"></i>
+                            {% else %}
+                                <i class="fa-solid fa-arrow-down" style="font-size: 14px;"></i>
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                </th>
+                <th scope="col">
+                    <a href="?sort_field=birth_date&sort_order={% if sort_field == 'birth_date' and sort_order == 'asc' %}desc{% else %}asc{% endif %}">
+                        Дата рождения
+                        {% if sort_field == 'birth_date' %}
+                            {% if sort_order == 'asc' %}
+                                <i class="fa-solid fa-arrow-up" style="font-size: 14px;"></i>
+                            {% else %}
+                                <i class="fa-solid fa-arrow-down" style="font-size: 14px;"></i>
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for teacher in teachers %}
+                <tr onclick="window.location.href='{% url 'teacher_detail' teacher.id %}'" style="cursor: pointer;">
+                    <th scope="row" class="id-col">{{ teacher.id }}</th>
+                    <td>{{ teacher.first_name }}</td>
+                    <td>{{ teacher.last_name }}</td>
+                    <td>
+                        {% if teacher.birth_date %}
+                            {{ teacher.birth_date }}
+                        {% else %}
+                            Не указано
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+
+<section class="content" style="flex-direction: column;">
+    <h1>Удаление курса</h1>
+    <p>{{ course.name}} - {{ course.teacher }}</p>
+    <form method="post" class="row g-2">
+        {% csrf_token %}
+        <button class="btn btn-outline-danger btn-lg" type="submit">Удалить курс</button>
+        <a href="{% url 'course_detail' course.id %}" class="btn btn-outline-success btn-lg">Отменить</a>
+    </form>
+</section>
+
+{% endblock %}
