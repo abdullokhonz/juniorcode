@@ -1,11 +1,12 @@
-juniorcode/.env
+# Ignore secret environment variables
+.env
 
 # Ignore Python cache files
 *.pyc
 __pycache__/
 
-# Ignore JetBrains project files
-.idea/
-
-# Ignore virtual environment
+# Ignore the virtual environment directory (if used)
 venv/
+
+# Ignore the JetBrains IDE project files
+.idea/
