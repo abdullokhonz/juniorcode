@@ -1,0 +1,9 @@
+juniorcode/.env
+__pycache__/
+*.pyc
+
+# Ignore JetBrains project files
+.idea/
+
+# Ignore virtual environment
+venv/
