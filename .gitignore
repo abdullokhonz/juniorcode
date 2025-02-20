@@ -1,6 +1,8 @@
 juniorcode/.env
-__pycache__/
+
+# Ignore Python cache files
 *.pyc
+__pycache__/
 
 # Ignore JetBrains project files
 .idea/
