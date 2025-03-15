@@ -6,7 +6,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('DJANGO_SECRET_KEY')
 DEBUG = config('DJANGO_DEBUG', cast=bool)
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['juniorcode.up.railway.app', 'localhost', '127.0.0.1']
+
+CSRF_TRUSTED_ORIGINS = ['https://juniorcode.up.railway.app']
+
+CSRF_COOKIE_SECURE = not DEBUG
+SESSION_COOKIE_SECURE = not DEBUG
 
 INSTALLED_APPS = [
     'main',
