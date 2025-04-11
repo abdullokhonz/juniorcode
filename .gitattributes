@@ -1,5 +1,5 @@
 # Mark all files in the 'staticfiles' folder as vendored (excluded from language statistics)
-staticfiles/** linguist-vendored
+/staticfiles/** linguist-vendored
 
 # Force GitHub to recognize Python as the main language
 *.py linguist-language=Python
