@@ -94,3 +94,12 @@ if not DEBUG:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# settings.py
+ROBOTS_DEFAULT_RULES = """
+User-agent: *
+Disallow: /students/
+Disallow: /teachers/
+Disallow: /courses/
+Disallow: /admin/
+"""

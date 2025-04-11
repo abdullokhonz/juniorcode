@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.shortcuts import render
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -69,3 +71,10 @@ def main(request):
         'data_class_format': data_class_format,
         'data_direction': data_direction,
     })
+
+
+def robots_txt(request):
+    robots_content = settings.ROBOTS_DEFAULT_RULES
+
+    # Отправляем ответ с правильным типом контента
+    return HttpResponse(robots_content, content_type="text/plain")
