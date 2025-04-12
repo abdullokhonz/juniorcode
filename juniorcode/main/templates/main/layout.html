@@ -8,15 +8,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- 🌟 Название страницы -->
-    <title>JuniorCode — обучение программированию</title>
+    <title>{{ title }}</title>
 
     <!-- ✅ Описание сайта для Google -->
     <meta name="description" content="Онлайн-школа программирования для начинающих. JuniorCode — учись, играй и развивайся.">
 
     <!-- 🧠 SEO-оптимизация -->
-    <meta name="keywords" content="программирование, junior, обучение, Python, кодинг, школа, JuniorCode">
-    <meta name="author" content="JuniorCode Team">
-    <meta name="robots" content="index, follow"> <!-- Разрешаем индексацию сайта -->
+    <meta name="keywords" content="программирование, junior, обучение, Python, кодинг, школа, JuniorCode, code">
+    <meta name="author" content="abdullokhonz — Fullstack Developer">
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+    {% if noindex %}
+        <meta name="robots" content="noindex, nofollow">
+    {% else %}
+        <meta name="robots" content="index, follow">
+    {% endif %}
 
     <!-- 🌐 Open Graph (для соцсетей и Google) -->
     <meta property="og:title" content="JuniorCode — обучение программированию">

@@ -1,12 +1,17 @@
 from django.conf import settings
 from django.shortcuts import render
 from django.http import HttpResponse
+from courses.models import Courses
+from students.models import Students
+from teachers.models import Teachers
 
 
 # Create your views here.
 
 
 def main(request):
+    title: str = "JuniorCode — обучение программированию"
+
     data_class_format: list = [
         {
             'color': '#ff69b4',
@@ -67,14 +72,32 @@ def main(request):
         },
     ]
 
+    noindex: bool = False
+
     return render(request, 'main/index.html', {
+        'title': title,
         'data_class_format': data_class_format,
         'data_direction': data_direction,
+        'noindex': noindex
     })
 
 
 def robots_txt(request):
     robots_content = settings.ROBOTS_DEFAULT_RULES
 
-    # Отправляем ответ с правильным типом контента
     return HttpResponse(robots_content, content_type="text/plain")
+
+
+# @require_GET
+# def sitemap():
+#     content = '''<?xml version="1.0" encoding="UTF-8"?>
+#     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+#        <url>
+#           <loc>https://juniorcode.up.railway.app/</loc>
+#           <lastmod>2025-04-12</lastmod>
+#           <changefreq>weekly</changefreq>
+#           <priority>1.0</priority>
+#        </url>
+#     </urlset>'''
+#
+#     return HttpResponse(content, content_type="application/xml")

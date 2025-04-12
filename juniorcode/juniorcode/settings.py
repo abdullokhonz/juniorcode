@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps'
 ]
 
 MIDDLEWARE = [
@@ -102,4 +103,5 @@ Disallow: /students/
 Disallow: /teachers/
 Disallow: /courses/
 Disallow: /admin/
+Sitemap: https://juniorcode.up.railway.app/sitemap.xml
 """

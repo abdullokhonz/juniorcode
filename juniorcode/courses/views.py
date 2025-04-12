@@ -12,6 +12,8 @@ from django.views.generic import DetailView, UpdateView, DeleteView
 
 
 def all_courses(request):
+    title: str = "JuniorCode — курсы"
+
     query = request.GET.get('q', '')
     search_field = request.GET.get('search_field', 'all')
 
@@ -69,12 +71,16 @@ def all_courses(request):
     elif sort_field == 'end_date':
         courses = courses.order_by('end_date' if sort_order == 'asc' else '-end_date')
 
+    noindex: bool = True
+
     return render(request, 'courses/all_courses.html', {
+        'title': title,
         'courses': courses,
         'query': query,
         'search_field': search_field,
         'sort_field': sort_field,
-        'sort_order': sort_order
+        'sort_order': sort_order,
+        'noindex': noindex
     })
 
 

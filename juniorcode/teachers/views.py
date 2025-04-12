@@ -13,6 +13,8 @@ from django.views.generic import DetailView, UpdateView, DeleteView
 
 
 def all_teachers(request):
+    title: str = "JuniorCode — преподаватели"
+
     query = request.GET.get('q', '')
     search_field = request.GET.get('search_field', 'all')
 
@@ -61,12 +63,16 @@ def all_teachers(request):
     elif sort_field == 'birth_date':
         teachers = teachers.order_by('birth_date' if sort_order == 'asc' else '-birth_date')
 
+    noindex: bool = True
+
     return render(request, 'teachers/all_teachers.html', {
+        'title': title,
         'teachers': teachers,
         'query': query,
         'search_field': search_field,
         'sort_field': sort_field,
-        'sort_order': sort_order
+        'sort_order': sort_order,
+        'noindex': noindex
     })
 
 
